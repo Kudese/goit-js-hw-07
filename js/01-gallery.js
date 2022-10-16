@@ -33,7 +33,7 @@ function onClickImeg(event) {
   instance.show();
   //Close modal press "Escape"
   elGellery.addEventListener("keydown", (event) => {
-    if ((event.code === "Escape")) {
+    if (event.code === "Escape") {
       instance.close();
     }
   });
