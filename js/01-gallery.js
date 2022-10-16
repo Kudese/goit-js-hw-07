@@ -1,18 +1,40 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
-// console.log(galleryItems);
-
 const elGellery = document.querySelector(".gallery");
 
-let listGellery = "";
-let iteamGallary = ""
-galleryItems
-  .map(
-    (preview, original, description) =>
-     listGellery = listGellery +`<li><img src="${preview}" data-src="${original}" alt="${description}"></li>`
-     console.log(preview)
-  )
-  ;
+// Create DOM element
 
-elGellery.innerHTML = `<ul>${listGellery}</ul>`;
+let listGellery = "";
+for (let i = 0; i < galleryItems.length; i++) {
+  const { preview, original, description } = galleryItems[i];
+  listGellery += `
+  <div class="gallery__item">
+  <a class="gallery__link" href="${original}">
+  <img class="gallery__image" alt="${description}" src="${preview}" data-source="${original}"/> 
+  </a>
+  </div>`;
+}
+elGellery.innerHTML = listGellery;
+//Event Delegation
+
+elGellery.addEventListener("click", onClickImeg);
+
+function onClickImeg(event) {
+  event.preventDefault();
+  //Chekc click
+  if (event.target.nodeName !== "IMG") {
+    return;
+  }
+  // Open modal windiw
+  const instance = basicLightbox.create(`
+    <img src='${event.target.dataset.source}' width="800" height="600">
+`);
+  instance.show();
+  //Close modal press "Escape"
+  elGellery.addEventListener("keydown", (event) => {
+    if ((event.code === "Escape")) {
+      instance.close();
+    }
+  });
+}
