@@ -9,10 +9,10 @@ let gallaryList = "";
 for (let i = 0; i < galleryItems.length; i++) {
   const { preview, original, description } = galleryItems[i];
   gallaryList += `<li><a classs='gallery__item' href='${original}' >
-    <img class="gallery__image" src="${preview}" alt="${description}">
+    <img class="gallery__image"  data-source=“${original}” src="${preview}" alt="${description}">
     </a></li>`;
 }
-elGallery.innerHTML = gallaryList;
+elGallery.innerHTML = gallaryList; 
 //Install simplelightbox
 let lightbox = new SimpleLightbox(".gallery a", {
   captionsData: "alt",
